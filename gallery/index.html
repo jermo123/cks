@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dairy Queen Cake Decorator Gallery</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Lightbox CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Dairy Queen Cake Gallery</h1>
+        <nav>
+            <button id="standardBtn" class="active">Standard Designs</button>
+            <button id="customBtn">Custom Designs</button>
+            <button id="favoritesBtn">Favorites</button>
+        </nav>
+        <input type="text" id="searchBar" placeholder="Search designs...">
+    </header>
+
+    <main>
+        <div id="gallery" class="gallery-grid">
+            <!-- Dynamic Gallery Items Will Appear Here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Dairy Queen. All rights reserved.</p>
+    </footer>
+
+    <!-- jQuery (required for Lightbox) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Lightbox JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="scripts.js"></script>
+</body>
+</html>

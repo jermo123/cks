@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Dairy Queen Cake Decorator Gallery</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Panel</h1>
+    </header>
+
+    <main>
+        <section class="admin-form">
+            <h2>Add New Design</h2>
+            <form id="addDesignForm">
+                <label for="designTitle">Title:</label>
+                <input type="text" id="designTitle" name="designTitle" required>
+
+                <label for="designDescription">Description:</label>
+                <textarea id="designDescription" name="designDescription" rows="4" required></textarea>
+
+                <label for="designCategory">Category:</label>
+                <select id="designCategory" name="designCategory" required>
+                    <option value="standard">Standard</option>
+                    <option value="custom">Custom</option>
+                </select>
+
+                <label for="designImage">Image URL:</label>
+                <input type="url" id="designImage" name="designImage" placeholder="https://yourdomain.com/images/standard/design3.jpg" required>
+
+                <button type="submit">Generate Code</button>
+            </form>
+        </section>
+
+        <section class="code-output">
+            <h2>Generated Code Snippet</h2>
+            <pre id="codeSnippet">// Add the following object to the 'galleryData' in scripts.js
+{
+    "title": "Sample Title",
+    "description": "Sample description of the design.",
+    "img": "images/standard/design3.jpg"
+}</pre>
+            <button id="copyButton">Copy to Clipboard</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Dairy Queen. All rights reserved.</p>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script>
+        document.getElementById('addDesignForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('designTitle').value.trim();
+            const description = document.getElementById('designDescription').value.trim();
+            const category = document.getElementById('designCategory').value;
+            const img = document.getElementById('designImage').value.trim();
+
+            if (title && description && img) {
+                const code = `{
+    "title": "${title.replace(/"/g, '\\"')}",
+    "description": "${description.replace(/"/g, '\\"')}",
+    "img": "${img}"
+}`;
+
+                document.getElementById('codeSnippet').textContent = `// Add the following object to the '${category}' array in scripts.js\n${code}`;
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+        });
+
+        document.getElementById('copyButton').addEventListener('click', function() {
+            const code = document.getElementById('codeSnippet').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Code snippet copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy code.');
+            });
+        });
+    </script>
+</body>
+</html>
