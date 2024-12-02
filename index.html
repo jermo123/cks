@@ -20,12 +20,12 @@
                 </div>
                 <ul class="nav-links" id="nav-links">
                     <div class="topbar-buttons">
-                        <button class="cake-gallery-btn" onclick="showGallery('standard')">
+                        <a href="standard-cakes.html" class="cake-gallery-btn">
                             <i class="fas fa-birthday-cake"></i> Standard Cakes
-                        </button>
-                        <button class="cake-gallery-btn" onclick="showGallery('custom')">
+                        </a>
+                        <a href="custom-cakes.html" class="cake-gallery-btn">
                             <i class="fas fa-paint-brush"></i> Custom Cakes
-                        </button>
+                        </a>
                     </div>
                     <button id="dark-mode-toggle" aria-label="Toggle Dark Mode">
                         <i class="fas fa-moon"></i>
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="cake-galleries">
-            <div id="standard-gallery" class="gallery"></div>
+            <div id="standard-gallery" class="gallery active"></div>
             <div id="custom-gallery" class="gallery"></div>
         </div>
     </div>
@@ -733,35 +733,6 @@
                 justify-content: center;
             }
 
-            /* Dark mode considerations */
-            @media (prefers-color-scheme: dark) {
-                .ref-card {
-                    background: #2d2d2d;
-                    color: #fff;
-                }
-
-                .tip-item, .color-item, .technique-item {
-                    background: #3d3d3d;
-                }
-
-                .tab-btn {
-                    background: #3d3d3d;
-                    color: #fff;
-                }
-                
-                .tab-btn.active {
-                    background: #0066cc;
-                }
-
-                .color-item {
-                    background: #3d3d3d;
-                }
-                
-                .color-sample {
-                    border-color: #444;
-                }
-            }
-
             .design-note {
                 font-size: 0.9em;
                 color: #666;
@@ -784,17 +755,6 @@
                 position: absolute;
                 left: 0;
                 color: #0066cc;
-            }
-
-            /* Dark mode adjustments */
-            @media (prefers-color-scheme: dark) {
-                .design-note {
-                    color: #aaa;
-                }
-                
-                .technique-item li:before {
-                    color: #4d94ff;
-                }
             }
 
             .airbrush-color-grid {
@@ -864,21 +824,6 @@
                 position: absolute;
                 left: 0;
                 color: #0066cc;
-            }
-
-            /* Dark mode adjustments */
-            @media (prefers-color-scheme: dark) {
-                .airbrush-color-item, .airbrush-tips {
-                    background: #3d3d3d;
-                }
-                
-                .tip-box {
-                    background: #2d2d2d;
-                }
-
-                .beginner-tip {
-                    color: #5cb85c;
-                }
             }
 
             .gallery-popup {
@@ -981,21 +926,6 @@
                 margin-top: 10px;
             }
 
-            /* Dark mode adjustments */
-            @media (prefers-color-scheme: dark) {
-                .printer-section {
-                    background: #3d3d3d;
-                }
-                
-                .printer-section h4 {
-                    color: #4d94ff;
-                }
-                
-                .warning-note {
-                    color: #ff6b6b;
-                }
-            }
-
             .topbar-buttons {
                 display: flex;
                 gap: 15px;
@@ -1031,17 +961,6 @@
 
             .cake-gallery-btn i {
                 font-size: 1.2rem;
-            }
-
-            /* Dark mode adjustments */
-            @media (prefers-color-scheme: dark) {
-                .cake-gallery-btn {
-                    background: linear-gradient(145deg, #e74c3c, #c0392b);
-                }
-
-                .cake-gallery-btn:hover {
-                    background: linear-gradient(145deg, #ff6b6b, #e74c3c);
-                }
             }
 
             /* Responsive adjustments */
