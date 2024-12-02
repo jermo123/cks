@@ -41,7 +41,10 @@
             <span class="close-gallery">&times;</span>
             <div class="gallery-content">
                 <button class="gallery-nav prev" onclick="changeImage(-1)">&#10094;</button>
-                <img id="gallery-image" src="" alt="Cake Image">
+                <div class="gallery-image-container">
+                    <img id="gallery-image" src="" alt="Cake Image">
+                    <h3 id="gallery-title" class="gallery-title"></h3>
+                </div>
                 <button class="gallery-nav next" onclick="changeImage(1)">&#10095;</button>
             </div>
         </div>
@@ -1055,6 +1058,32 @@
                     width: 100%;
                     justify-content: center;
                 }
+            }
+
+            .gallery-image-container {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                max-width: 90%;
+            }
+
+            .gallery-title {
+                color: white;
+                text-align: center;
+                margin-top: 15px;
+                font-size: 1.2rem;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            }
+
+            /* Add loading animation */
+            #gallery-image {
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+            }
+
+            #gallery-image.loaded {
+                opacity: 1;
             }
         </style>
     </main>

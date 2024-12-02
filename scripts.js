@@ -1,273 +1,251 @@
 // scripts.js
 // Add this to your existing JavaScript
-function showGallery(type) {
-    // Hide all galleries
-    document.querySelectorAll('.gallery').forEach(gallery => {
-        gallery.classList.remove('active');
-    });
-    
-    // Show selected gallery
-    document.getElementById(`${type}-gallery`).classList.add('active');
-    
-    // Update button states
-    document.querySelectorAll('.cake-gallery-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    const activeBtn = document.querySelector(`[onclick="showGallery('${type}')"]`);
-    if (activeBtn) activeBtn.classList.add('active');
-}
 
-let currentGallery = [];
+let currentImages = [];
 let currentIndex = 0;
 
-async function loadGalleryImages(type) {
-    try {
-        const response = await fetch(`gallery/images/${type}`);
-        const data = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(data, 'text/html');
-        const links = Array.from(doc.querySelectorAll('a'))
-            .filter(link => link.href.match(/\.(jpg|jpeg|png)$/i))
-            .map(link => `gallery/images/${type}/${link.href.split('/').pop()}`);
-        return links;
-    } catch (error) {
-        console.error('Error loading gallery images:', error);
-        return [];
-    }
+function createCatalogView(type) {
+    const catalogContainer = document.getElementById(`${type}-gallery`);
+    
+    // Clear existing content
+    catalogContainer.innerHTML = '';
+    
+    // Create grid container
+    const gridContainer = document.createElement('div');
+    gridContainer.className = 'catalog-grid';
+    
+    // Fetch and create catalog items
+    fetch(`gallery/images/${type}/`)
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const images = Array.from(doc.querySelectorAll('a'))
+                .filter(a => a.href.match(/\.(jpg|jpeg|png|gif)$/i))
+                .map(a => ({
+                    src: a.href.split('/').pop(),
+                    title: a.href.split('/').pop().replace(/\.[^/.]+$/, '').replace(/_/g, ' ')
+                }));
+            
+            images.forEach((image, index) => {
+                const catalogItem = document.createElement('div');
+                catalogItem.className = 'catalog-item';
+                
+                catalogItem.innerHTML = `
+                    <div class="catalog-image-container">
+                        <img src="gallery/images/${type}/${image.src}" 
+                             alt="${image.title}"
+                             onclick="showGallery('${type}', ${index})"
+                             onerror="handleImageError(this)">
+                    </div>
+                    <div class="catalog-info">
+                        <h3>${image.title}</h3>
+                    </div>
+                `;
+                
+                gridContainer.appendChild(catalogItem);
+            });
+            
+            catalogContainer.appendChild(gridContainer);
+            
+            // Store the images for gallery view
+            currentImages = images.map(img => ({
+                src: `gallery/images/${type}/${img.src}`,
+                title: img.title
+            }));
+        })
+        .catch(error => {
+            console.error('Error loading images:', error);
+            catalogContainer.innerHTML = '<p>Error loading images. Please try again later.</p>';
+        });
+    
+    // Show the appropriate gallery
+    document.querySelectorAll('.gallery').forEach(g => g.classList.remove('active'));
+    catalogContainer.classList.add('active');
 }
 
-async function showGallery(type) {
-    currentGallery = await loadGalleryImages(type);
-    if (currentGallery.length > 0) {
-        currentIndex = 0;
-        document.getElementById('gallery-popup').style.display = 'block';
-        showImage(currentIndex);
-    }
+function showGallery(type, startIndex = 0) {
+    currentIndex = startIndex;
+    updateGalleryImage();
+    
+    const popup = document.getElementById('gallery-popup');
+    popup.style.display = 'block';
 }
 
-function showImage(index) {
-    const img = document.getElementById('gallery-image');
-    img.src = currentGallery[index];
+function updateGalleryImage() {
+    const galleryImage = document.getElementById('gallery-image');
+    const currentImage = currentImages[currentIndex];
+    galleryImage.src = currentImage.src;
+    galleryImage.alt = currentImage.title;
+    
+    // Update title if it exists
+    const titleElement = document.getElementById('gallery-title');
+    if (titleElement) {
+        titleElement.textContent = currentImage.title;
+    }
 }
 
 function changeImage(direction) {
     currentIndex += direction;
-    if (currentIndex >= currentGallery.length) currentIndex = 0;
-    if (currentIndex < 0) currentIndex = currentGallery.length - 1;
-    showImage(currentIndex);
+    
+    // Loop around if we reach the end or beginning
+    if (currentIndex >= currentImages.length) {
+        currentIndex = 0;
+    } else if (currentIndex < 0) {
+        currentIndex = currentImages.length - 1;
+    }
+    
+    updateGalleryImage();
 }
 
-// Close gallery when clicking the close button or outside the image
-document.querySelector('.close-gallery').addEventListener('click', () => {
-    document.getElementById('gallery-popup').style.display = 'none';
-});
+// Add image loading error handling
+function handleImageError(img) {
+    img.onerror = null; // Prevent infinite loop
+    img.src = 'images/placeholder.jpg'; // Path to your placeholder image
+    console.log(`Failed to load image: ${img.src}`);
+}
 
-document.getElementById('gallery-popup').addEventListener('click', (e) => {
-    if (e.target.id === 'gallery-popup') {
-        document.getElementById('gallery-popup').style.display = 'none';
-    }
-});
-
-// Add keyboard navigation
-document.addEventListener('keydown', (e) => {
-    if (document.getElementById('gallery-popup').style.display === 'block') {
-        if (e.key === 'ArrowLeft') changeImage(-1);
-        if (e.key === 'ArrowRight') changeImage(1);
-        if (e.key === 'Escape') document.getElementById('gallery-popup').style.display = 'none';
-    }
-});
-
-// Initialize the gallery when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    showGallery('standard');
-});
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Responsive Navigation Menu Toggle
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('nav-links');
-
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
-        hamburger.classList.toggle('active');
-    });
-
-    // Close the menu when a link is clicked (for mobile)
-    const navItems = navLinks.querySelectorAll('a');
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            if (navLinks.classList.contains('open')) {
-                navLinks.classList.remove('open');
-                hamburger.classList.remove('active');
-            }
-        });
-    });
-
-    // 2. Smooth Scrolling for Navigation Links
-    const smoothScroll = (target, duration) => {
-        const targetElement = document.querySelector(target);
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - 60; // Adjust for fixed header
-        const startPosition = window.pageYOffset;
-        const distance = targetPosition - startPosition;
-        let startTime = null;
-
-        const animation = currentTime => {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const run = ease(timeElapsed, startPosition, distance, duration);
-            window.scrollTo(0, run);
-            if (timeElapsed < duration) requestAnimationFrame(animation);
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click handlers for the gallery type buttons
+    document.querySelectorAll('.cake-gallery-btn').forEach(btn => {
+        btn.onclick = function() {
+            const type = this.getAttribute('data-gallery-type');
+            createCatalogView(type);
         };
-
-        // Ease function (easeInOutCubic)
-        const ease = (t, b, c, d) => {
-            t /= d / 2;
-            if (t < 1) return c / 2 * t * t * t + b;
-            t -= 2;
-            return c / 2 * (t * t * t + 2) + b;
-        };
-
-        requestAnimationFrame(animation);
+    });
+    
+    const popup = document.getElementById('gallery-popup');
+    const closeBtn = document.querySelector('.close-gallery');
+    const galleryImage = document.getElementById('gallery-image');
+    
+    // Add error handling for images
+    galleryImage.onerror = function() {
+        handleImageError(this);
     };
-
-    const navLinkElements = document.querySelectorAll('nav ul li a');
-    navLinkElements.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const target = this.getAttribute('href');
-            if (target.startsWith('#')) {
-                e.preventDefault();
-                smoothScroll(target, 1000);
+    
+    closeBtn.onclick = function() {
+        popup.style.display = 'none';
+    }
+    
+    // Close if clicking outside the image
+    popup.onclick = function(e) {
+        if (e.target === popup) {
+            popup.style.display = 'none';
+        }
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (popup.style.display === 'block') {
+            if (e.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeImage(1);
+            } else if (e.key === 'Escape') {
+                popup.style.display = 'none';
             }
-        });
+        }
     });
 
-   
-    // 4. Accordion Functionality for Guides and Tutorials
-    const accordionButtons = document.querySelectorAll('.accordion-button');
-
-    accordionButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const accordionContent = button.nextElementSibling;
+    // Add touch support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    popup.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    popup.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeLength = touchEndX - touchStartX;
         
-            // Toggle active state
-            button.classList.toggle('active');
-        
-            // Toggle content visibility
-            if (button.classList.contains('active')) {
-                accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+        if (Math.abs(swipeLength) > swipeThreshold) {
+            if (swipeLength > 0) {
+                changeImage(-1); // Swipe right, go to previous
             } else {
-                accordionContent.style.maxHeight = 0;
+                changeImage(1); // Swipe left, go to next
             }
-        });
-            // Optional: Close other accordion items
-            // Close other accordions if you want only one open at a time
-            /*
-            accordionButtons.forEach(otherButton => {
-                if (otherButton !== button && otherButton.classList.contains('active')) {
-                    otherButton.classList.remove('active');
-                    otherButton.nextElementSibling.style.maxHeight = 0;
-                }
-            });
-            */
-        });
- 
-
-    // 5. Contact Form Validation
-    const contactForm = document.getElementById('contact-form');
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const messageInput = document.getElementById('message');
-    const nameError = document.getElementById('name-error');
-    const emailError = document.getElementById('email-error');
-    const messageError = document.getElementById('message-error');
-    const formSuccess = document.getElementById('form-success');
-
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        // Reset errors
-        nameError.textContent = '';
-        emailError.textContent = '';
-        messageError.textContent = '';
-        nameError.style.display = 'none';
-        emailError.style.display = 'none';
-        messageError.style.display = 'none';
-        formSuccess.textContent = '';
-
-        let isValid = true;
-
-        // Validate Name
-        if (nameInput.value.trim() === '') {
-            nameError.textContent = 'Please enter your name.';
-            nameError.style.display = 'block';
-            isValid = false;
         }
-
-        // Validate Email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (emailInput.value.trim() === '') {
-            emailError.textContent = 'Please enter your email.';
-            emailError.style.display = 'block';
-            isValid = false;
-        } else if (!emailRegex.test(emailInput.value.trim())) {
-            emailError.textContent = 'Please enter a valid email.';
-            emailError.style.display = 'block';
-            isValid = false;
-        }
-
-        // Validate Message
-        if (messageInput.value.trim() === '') {
-            messageError.textContent = 'Please enter your message.';
-            messageError.style.display = 'block';
-            isValid = false;
-        }
-
-        if (isValid) {
-            // Simulate form submission (replace with actual submission logic)
-            formSuccess.textContent = 'Thank you for contacting us! We will get back to you shortly.';
-            contactForm.reset();
-        }
-    });
-
-    // 6. Dark Mode Toggle
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-
-    // Check for saved user preference, if any, on load of the website
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-    } else if (localStorage.getItem("theme") === "light") {
-        document.body.classList.remove("dark-mode");
-    } else if (prefersDarkScheme.matches) {
-        document.body.classList.add("dark-mode");
-    }
-
-    darkModeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-
-        // Save user preference in localStorage
-        if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('theme', 'dark');
-            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        } else {
-            localStorage.setItem('theme', 'light');
-            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        }
-    });
-
-    // Initialize Dark Mode Toggle Icon
-    if (document.body.classList.contains('dark-mode')) {
-        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    } else {
-        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
     }
 });
 
-// Dark mode toggle functionality
-document.getElementById('dark-mode-toggle').addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode');
-});
+// Add this CSS to your stylesheet
+const styles = `
+    .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
 
-// Hamburger menu functionality
-document.getElementById('hamburger').addEventListener('click', function() {
-    document.getElementById('nav-links').classList.toggle('active');
-});
+    .catalog-item {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .catalog-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .catalog-image-container {
+        position: relative;
+        padding-top: 75%; /* 4:3 Aspect Ratio */
+        overflow: hidden;
+    }
+
+    .catalog-image-container img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+    }
+
+    .catalog-info {
+        padding: 15px;
+    }
+
+    .catalog-info h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .catalog-info p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+        .catalog-item {
+            background: #2d2d2d;
+        }
+
+        .catalog-info h3 {
+            color: #fff;
+        }
+
+        .catalog-info p {
+            color: #ccc;
+        }
+    }
+`;
+
+// Add the styles to the document
+const styleSheet = document.createElement("style");
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
