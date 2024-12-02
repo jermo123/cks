@@ -7,6 +7,12 @@ let currentIndex = 0;
 function createCatalogView(type) {
     const catalogContainer = document.getElementById(`${type}-gallery`);
     
+    // Check if container exists
+    if (!catalogContainer) {
+        console.error(`Gallery container for ${type} not found`);
+        return;
+    }
+    
     // Clear existing content
     catalogContainer.innerHTML = '';
     
@@ -16,7 +22,12 @@ function createCatalogView(type) {
     
     // Fetch and create catalog items
     fetch(`gallery/images/${type}/`)
-        .then(response => response.text())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+        })
         .then(html => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
@@ -26,6 +37,11 @@ function createCatalogView(type) {
                     src: a.href.split('/').pop(),
                     title: a.href.split('/').pop().replace(/\.[^/.]+$/, '').replace(/_/g, ' ')
                 }));
+            
+            if (images.length === 0) {
+                gridContainer.innerHTML = '<p>No images found in this gallery.</p>';
+                return;
+            }
             
             images.forEach((image, index) => {
                 const catalogItem = document.createElement('div');
@@ -56,7 +72,13 @@ function createCatalogView(type) {
         })
         .catch(error => {
             console.error('Error loading images:', error);
-            catalogContainer.innerHTML = '<p>Error loading images. Please try again later.</p>';
+            gridContainer.innerHTML = `
+                <div class="error-message">
+                    <p>Error loading images. Please try again later.</p>
+                    <p class="error-details">${error.message}</p>
+                </div>
+            `;
+            catalogContainer.appendChild(gridContainer);
         });
     
     // Show the appropriate gallery
@@ -111,6 +133,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.cake-gallery-btn').forEach(btn => {
         btn.onclick = function() {
             const type = this.getAttribute('data-gallery-type');
+            if (!type) {
+                console.error('Gallery type not specified on button');
+                return;
+            }
             createCatalogView(type);
         };
     });

@@ -6,7 +6,8 @@
     <title>Dairy Queen Cake Decorators</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnH2N2u3K4hKlfFtoQgvkIclBD5lwL4b5o5rQW7Zym4Q5tKjS5mXxD2N9hG5pOvE3V1W0hw=="
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
+        integrity="sha512-Fo3rlrZj/k7ujTnHN2N2u3K4lXxO8v9wZsspkfBB3DfLyapnHiH3meWUUQQEC4o9b1v3szVMZOsCIIOMBc1PCg==" 
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -41,10 +42,7 @@
             <span class="close-gallery">&times;</span>
             <div class="gallery-content">
                 <button class="gallery-nav prev" onclick="changeImage(-1)">&#10094;</button>
-                <div class="gallery-image-container">
-                    <img id="gallery-image" src="" alt="Cake Image">
-                    <h3 id="gallery-title" class="gallery-title"></h3>
-                </div>
+                <img id="gallery-image" src="" alt="Cake Image">
                 <button class="gallery-nav next" onclick="changeImage(1)">&#10095;</button>
             </div>
         </div>
@@ -1060,30 +1058,33 @@
                 }
             }
 
-            .gallery-image-container {
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                max-width: 90%;
-            }
-
-            .gallery-title {
-                color: white;
+            .error-message {
                 text-align: center;
-                margin-top: 15px;
-                font-size: 1.2rem;
-                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+                padding: 20px;
+                color: #721c24;
+                background-color: #f8d7da;
+                border: 1px solid #f5c6cb;
+                border-radius: 4px;
+                margin: 20px;
             }
 
-            /* Add loading animation */
-            #gallery-image {
-                opacity: 0;
-                transition: opacity 0.3s ease-in-out;
+            .error-details {
+                font-size: 0.9em;
+                color: #856404;
+                margin-top: 10px;
             }
 
-            #gallery-image.loaded {
-                opacity: 1;
+            /* Dark mode support */
+            @media (prefers-color-scheme: dark) {
+                .error-message {
+                    color: #f8d7da;
+                    background-color: #721c24;
+                    border-color: #f5c6cb;
+                }
+                
+                .error-details {
+                    color: #ffeeba;
+                }
             }
         </style>
     </main>
