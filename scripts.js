@@ -5,13 +5,27 @@ let currentImages = [];
 let currentIndex = 0;
 
 function createCatalogView(type) {
-    const catalogContainer = document.getElementById(`${type}-gallery`);
+    // First, ensure the gallery containers exist
+    const standardGallery = document.getElementById('standard-gallery');
+    const customGallery = document.getElementById('custom-gallery');
     
-    // Check if container exists
+    if (!standardGallery || !customGallery) {
+        console.error('Gallery containers not found. Please check your HTML.');
+        return;
+    }
+    
+    const catalogContainer = document.getElementById(`${type}-gallery`);
     if (!catalogContainer) {
         console.error(`Gallery container for ${type} not found`);
         return;
     }
+    
+    // Hide all galleries first
+    standardGallery.style.display = 'none';
+    customGallery.style.display = 'none';
+    
+    // Show the selected gallery
+    catalogContainer.style.display = 'block';
     
     // Clear existing content
     catalogContainer.innerHTML = '';
@@ -123,18 +137,46 @@ function changeImage(direction) {
 // Add image loading error handling
 function handleImageError(img) {
     img.onerror = null; // Prevent infinite loop
-    img.src = 'images/placeholder.jpg'; // Path to your placeholder image
-    console.log(`Failed to load image: ${img.src}`);
+    img.src = 'gallery/images/placeholder.jpg'; // Updated path to match your directory structure
+    console.log(`Image failed to load: ${img.src}`);
 }
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
+    // Make sure gallery containers exist
+    const standardGallery = document.getElementById('standard-gallery');
+    const customGallery = document.getElementById('custom-gallery');
+    
+    if (!standardGallery || !customGallery) {
+        console.error('Gallery containers missing. Adding them dynamically.');
+        
+        // Create containers if they don't exist
+        const galleriesContainer = document.createElement('div');
+        galleriesContainer.className = 'cake-galleries';
+        
+        if (!standardGallery) {
+            const standard = document.createElement('div');
+            standard.id = 'standard-gallery';
+            standard.className = 'gallery';
+            galleriesContainer.appendChild(standard);
+        }
+        
+        if (!customGallery) {
+            const custom = document.createElement('div');
+            custom.id = 'custom-gallery';
+            custom.className = 'gallery';
+            galleriesContainer.appendChild(custom);
+        }
+        
+        // Add to the page
+        document.querySelector('main').appendChild(galleriesContainer);
+    }
+    
     // Add click handlers for the gallery type buttons
     document.querySelectorAll('.cake-gallery-btn').forEach(btn => {
         btn.onclick = function() {
-            // Try to get type from data attribute first, then fallback to onclick attribute
-            const type = this.getAttribute('data-gallery-type') || 
-                        this.getAttribute('onclick')?.match(/showGallery\('(\w+)'\)/)?.[1];
+            const type = this.getAttribute('onclick')?.match(/showGallery\('(\w+)'\)/)?.[1] || 
+                        this.getAttribute('data-gallery-type');
             
             if (!type) {
                 console.error('Gallery type not specified on button');
