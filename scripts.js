@@ -1,5 +1,86 @@
 // scripts.js
+// Add this to your existing JavaScript
+function showGallery(type) {
+    // Hide all galleries
+    document.querySelectorAll('.gallery').forEach(gallery => {
+        gallery.classList.remove('active');
+    });
+    
+    // Show selected gallery
+    document.getElementById(`${type}-gallery`).classList.add('active');
+    
+    // Update button states
+    document.querySelectorAll('.cake-gallery-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    const activeBtn = document.querySelector(`[onclick="showGallery('${type}')"]`);
+    if (activeBtn) activeBtn.classList.add('active');
+}
 
+let currentGallery = [];
+let currentIndex = 0;
+
+async function loadGalleryImages(type) {
+    try {
+        const response = await fetch(`gallery/images/${type}`);
+        const data = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(data, 'text/html');
+        const links = Array.from(doc.querySelectorAll('a'))
+            .filter(link => link.href.match(/\.(jpg|jpeg|png)$/i))
+            .map(link => `gallery/images/${type}/${link.href.split('/').pop()}`);
+        return links;
+    } catch (error) {
+        console.error('Error loading gallery images:', error);
+        return [];
+    }
+}
+
+async function showGallery(type) {
+    currentGallery = await loadGalleryImages(type);
+    if (currentGallery.length > 0) {
+        currentIndex = 0;
+        document.getElementById('gallery-popup').style.display = 'block';
+        showImage(currentIndex);
+    }
+}
+
+function showImage(index) {
+    const img = document.getElementById('gallery-image');
+    img.src = currentGallery[index];
+}
+
+function changeImage(direction) {
+    currentIndex += direction;
+    if (currentIndex >= currentGallery.length) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = currentGallery.length - 1;
+    showImage(currentIndex);
+}
+
+// Close gallery when clicking the close button or outside the image
+document.querySelector('.close-gallery').addEventListener('click', () => {
+    document.getElementById('gallery-popup').style.display = 'none';
+});
+
+document.getElementById('gallery-popup').addEventListener('click', (e) => {
+    if (e.target.id === 'gallery-popup') {
+        document.getElementById('gallery-popup').style.display = 'none';
+    }
+});
+
+// Add keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (document.getElementById('gallery-popup').style.display === 'block') {
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'ArrowRight') changeImage(1);
+        if (e.key === 'Escape') document.getElementById('gallery-popup').style.display = 'none';
+    }
+});
+
+// Initialize the gallery when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    showGallery('standard');
+});
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Responsive Navigation Menu Toggle
     const hamburger = document.getElementById('hamburger');
@@ -179,4 +260,14 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
     }
+});
+
+// Dark mode toggle functionality
+document.getElementById('dark-mode-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+});
+
+// Hamburger menu functionality
+document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('nav-links').classList.toggle('active');
 });

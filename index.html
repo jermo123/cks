@@ -19,587 +19,1050 @@
                     <i class="fas fa-bars"></i>
                 </div>
                 <ul class="nav-links" id="nav-links">
-                    <li><a href="#troubleshooting">Troubleshooting</a></li>
-                    <li><a href="#tutorials">Tutorials</a></li>
-                    <li><a href="#orders">Current Orders</a></li>
-                    <li>
-                        <button id="dark-mode-toggle" aria-label="Toggle Dark Mode">
-                            <i class="fas fa-moon"></i>
+                    <div class="topbar-buttons">
+                        <button class="cake-gallery-btn" onclick="showGallery('standard')">
+                            <i class="fas fa-birthday-cake"></i> Standard Cakes
                         </button>
-                    </li>
+                        <button class="cake-gallery-btn" onclick="showGallery('custom')">
+                            <i class="fas fa-paint-brush"></i> Custom Cakes
+                        </button>
+                    </div>
+                    <button id="dark-mode-toggle" aria-label="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <div class="dashboard-content">
+        <!-- Add this popup gallery container -->
+        <div id="gallery-popup" class="gallery-popup">
+            <span class="close-gallery">&times;</span>
+            <div class="gallery-content">
+                <button class="gallery-nav prev" onclick="changeImage(-1)">&#10094;</button>
+                <img id="gallery-image" src="" alt="Cake Image">
+                <button class="gallery-nav next" onclick="changeImage(1)">&#10095;</button>
+            </div>
+        </div>
+        <div class="cake-galleries">
+            <div id="standard-gallery" class="gallery active"></div>
+            <div id="custom-gallery" class="gallery"></div>
+        </div>
+    </div>
+
     <!-- Main Content -->
     <main>
-                   
-    <style>
-        /* Container to hold the images side by side */
-        .gallery-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        /* Style for each gallery link */
-        .gallery-link {
-            margin: 0 15px;
-            text-align: center;
-            text-decoration: none;
-            color: #000;
-        }
-        /* Style for the images */
-        .gallery-link img {
-            max-width: 100%;
-            height: auto;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-        }
-        /* Caption below each image */
-        .gallery-caption {
-            font-size: 1.1em;
-margin-bottom: 20px;
-        }
-        /* Responsive design for smaller screens */
-        @media (max-width: 600px) {
-            .gallery-container {
-                flex-direction: column;
-                align-items: center;
-margin-bottom: 10px;
-            }
-            .gallery-link {
-            }
-        }
-    </style>
-    <div class="gallery-container">
-        <!-- Standard Cake Design Link -->
-        <a href="gallery/index.html" class="gallery-link">
-            <img src="gallery/images/1.png" alt="Standard Cake Designs" width=200px height=auto>
-            <div class="gallery-caption">Standard Cake Designs</div>
-        </a>
-       <!-- Custom Cake Design Link -->
-        <a href="gallery/index.html" class="gallery-link">
-            <img src="gallery/images/2.png" alt="Custom Cake Designs" width=200px height=auto>
-            <div class="gallery-caption">Custom Cake Designs</div>
-        </a>
-    </div>
-</div>
-<!-- Troubleshooting Guides -->
-<section id="troubleshooting">
-    <h2>Troubleshooting Guides</h2>
-    <div class="accordion">
-        <!-- Guide 1 -->
-        <div class="accordion-item">
-            <button class="accordion-button">Guide 1: Coloring Clear Gel Successfully</button>
-            <div class="accordion-content">
-                <p>
-                    <strong>Materials Needed:</strong><br>
-                    • Clear piping gel<br>
-                    • Gel food coloring (desired colors)<br>
-                    • Clean mixing bowls<br>
-                    • Spatula or spoon<br><br>
+        <!-- Quick Reference Section -->
+        <section id="quick-reference">
+            <h2>Quick Reference</h2>
+            <div class="reference-grid">
+                <!-- Cake Specifications Card -->
+                <div class="ref-card">
+                    <h3>Cake Specifications</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <th>Cake Type</th>
+                            <th>Servings</th>
+                            <th>Thaw Time</th>
 
-                    <strong>Step-by-Step Instructions:</strong><br>
-                    1. <strong>Prepare Your Workspace:</strong> Ensure all utensils and bowls are clean to prevent contamination. Lay out parchment paper or a clean surface for testing colors.<br>
-                    2. <strong>Start with a Small Batch:</strong> Place a small amount of clear gel into a mixing bowl. It's easier to adjust colors in smaller quantities.<br>
-                    3. <strong>Add Gel Coloring Gradually:</strong> Use a toothpick or dropper to add a small amount of gel food coloring to the clear gel. Start with less color to avoid over-saturation.<br>
-                    4. <strong>Mix Thoroughly:</strong> Stir the gel and coloring together using a spatula, ensuring the color is evenly distributed. Scrape the sides and bottom of the bowl.<br>
-                    5. <strong>Test the Color:</strong> Apply a small dab of the colored gel onto the parchment paper. Observe the color under natural light.<br>
-                    6. <strong>Adjust as Necessary:</strong> If the color is too light, add more coloring in small increments. If too dark, add more clear gel to lighten it.<br>
-                    7. <strong>Repeat for Additional Colors:</strong> Use clean bowls and utensils for each new color to prevent cross-contamination.<br>
-                    8. <strong>Storage:</strong> Transfer the colored gel into airtight containers. Label each container with the color and date.<br>
-                    9. <strong>Application Tips:</strong> Use clean piping bags or tools to maintain color integrity. Apply gently to avoid introducing air bubbles.<br><br>
+                        </tr>
+                        <tr>
+                            <td>8" Round</td>
+                            <td>8-10</td>
+                            <td>20-25 min</td>
+ 
+                        </tr>
+                        <tr>
+                            <td>10" Round</td>
+                            <td>12-16</td>
+                            <td>25-30 min</td>
 
-                    <strong>Additional Tips:</strong><br>
-                    • <strong>Color Mixing:</strong> Mix gel colors to achieve custom shades (e.g., blue and yellow to make green).<br>
-                    • <strong>Consistency Check:</strong> Ensure the gel remains at the right consistency after adding color. If it becomes too thin, it may not hold its shape when applied.
-                </p>
-            </div>
-        </div>
-        <!-- Guide 2 -->
-        <div class="accordion-item">
-            <button class="accordion-button">Guide 2: Applying PhotoCake Edible Images</button>
-            <div class="accordion-content">
-                <p>
-                    <strong>Materials Needed:</strong><br>
-                    • Edible image printed from PhotoCake<br>
-                    • Cake with a smooth surface (preferably iced with whipped topping)<br>
-                    • Scissors (for trimming, if necessary)<br>
-                    • Small offset spatula or smoother<br><br>
+                        </tr>
+                        <tr>
+                            <td>Sheet Cake</td>
+                            <td>20-24</td>
+                            <td>30-35 min</td>
 
-                    <strong>Step-by-Step Instructions:</strong><br>
-                    1. <strong>Prepare the Edible Image:</strong> Keep the edible image sealed until ready to use to prevent it from drying out.<br>
-                    2. <strong>Trim if Necessary:</strong> Use clean, dry scissors to trim any excess areas around the image.<br>
-                    3. <strong>Prepare the Cake Surface:</strong> Ensure the cake surface is smooth, level, and free from excess moisture or crumbs.<br>
-                    4. <strong>Optional Dusting:</strong> Lightly dust the cake surface with powdered sugar or cornstarch to prevent the image from melting into the icing.<br>
-                    5. <strong>Remove the Backing:</strong> Gently peel the edible image from its backing sheet. If it sticks, place it in the freezer for about 15 seconds to help release it.<br>
-                    6. <strong>Apply the Image:</strong> Hold the image at the edges and carefully lay it onto the cake starting from the center, smoothing outward to prevent air bubbles.<br>
-                    7. <strong>Smooth the Image:</strong> Use a small offset spatula or smoother to gently smooth the image, ensuring it adheres evenly.<br>
-                    8. <strong>Finishing Touches:</strong> Add borders or decorations around the image to frame it and enhance the cake's appearance.<br><br>
+                        </tr>
+                        <tr>
+                            <td>Log Cake</td>
+                            <td>8-10</td>
+                            <td>20-25 min</td>
 
-                    <strong>Storage and Serving:</strong><br>
-                    • Keep the decorated cake refrigerated to maintain the integrity of the edible image.<br>
-                    • Avoid exposing the cake to direct sunlight or fluorescent lighting, which can fade the image.<br>
-                    • Serve the cake at room temperature for the best texture and taste.<br><br>
-
-                    <strong>Troubleshooting Tips:</strong><br>
-                    • <strong>Image Cracking:</strong> If the image is dry or cracks, lightly mist the back with a small amount of water before applying.<br>
-                    • <strong>Air Bubbles:</strong> Smooth out any air bubbles gently with your fingers or a smoother immediately after application.
-                </p>
-            </div>
-        </div>
-        <!-- Guide 3 -->
-        <div class="accordion-item">
-            <button class="accordion-button">Guide 3: Perfecting Whipped Topping Application</button>
-            <div class="accordion-content">
-                <p>
-                    <strong>Materials Needed:</strong><br>
-                    • Whipped topping (store-bought or freshly whipped)<br>
-                    • Chilled mixing bowl and beaters (if whipping yourself)<br>
-                    • Spatula and icing smoother<br>
-                    • Piping bags and tips (if decorating)<br><br>
-
-                    <strong>Step-by-Step Instructions:</strong><br>
-                    1. <strong>Keep Everything Cold:</strong> Chill your mixing bowl, beaters, and whipped topping to maintain firmness.<br>
-                    2. <strong>Proper Whipping:</strong> If whipping yourself, beat the topping until soft peaks form. Avoid over-whipping to prevent graininess.<br>
-                    3. <strong>Crumb Coat the Cake:</strong> Apply a thin layer of whipped topping to seal in crumbs. Refrigerate for 15 minutes to set.<br>
-                    4. <strong>Apply the Final Layer:</strong> Spread whipped topping evenly over the cake using a spatula. Use an icing smoother for a flawless finish.<br>
-                    5. <strong>Piping Decorations:</strong> Fill piping bags with whipped topping and use desired tips to create borders or designs.<br>
-                    6. <strong>Work Quickly:</strong> Whipped topping can soften at room temperature, so work efficiently to maintain consistency.<br><br>
-
-                    <strong>Tips for Success:</strong><br>
-                    • <strong>Stabilizing Whipped Topping:</strong> Consider adding a stabilizer like gelatin or cream of tartar if the topping needs to hold shape for extended periods.<br>
-                    • <strong>Flavor Enhancements:</strong> Add vanilla extract or other flavorings to the whipped topping for added taste.<br>
-                    • <strong>Coloring:</strong> Use gel-based food coloring to tint whipped topping without altering its consistency.<br><br>
-
-                    <strong>Storage:</strong><br>
-                    • Refrigerate the cake until serving time to keep the whipped topping firm.<br>
-                    • Avoid covering the cake with plastic wrap, which can stick to the topping; use a cake dome instead.
-                </p>
-            </div>
-        </div>
-        <!-- Guide 4 -->
-        <div class="accordion-item">
-            <button class="accordion-button">Guide 4: Fixing Air Bubbles in Gel</button>
-            <div class="accordion-content">
-                <p>
-                    <strong>Understanding the Issue:</strong><br>
-                    Air bubbles in piping gel can affect the appearance of your decorations. Preventing and removing them ensures a smooth finish.<br><br>
-
-                    <strong>Preventative Measures:</strong><br>
-                    1. <strong>Gentle Mixing:</strong> Stir the gel slowly and steadily to avoid incorporating air.<br>
-                    2. <strong>Avoid Shaking:</strong> Do not shake containers of gel; this introduces air bubbles.<br>
-                    3. <strong>Use Fresh Gel:</strong> Older gel may have more air bubbles due to repeated use.<br><br>
-
-                    <strong>Application Techniques:</strong><br>
-                    1. <strong>Slow Pouring:</strong> When transferring gel to piping bags or containers, pour slowly to minimize air pockets.<br>
-                    2. <strong>Burping the Bag:</strong> After filling a piping bag, squeeze out a small amount to remove trapped air before decorating.<br>
-                    3. <strong>Smoothing the Surface:</strong> After applying, use a damp, clean brush to smooth out any visible bubbles gently.<br><br>
-
-                    <strong>Fixing Existing Air Bubbles:</strong><br>
-                    1. <strong>Use a Toothpick or Needle:</strong> Gently prick air bubbles to release trapped air.<br>
-                    2. <strong>Heat Application:</strong> Lightly warming the gel can help bubbles rise to the surface. Use caution to avoid melting other decorations.<br>
-                    3. <strong>Reapplication:</strong> If bubbles persist, carefully remove the affected gel and reapply with a new batch.<br><br>
-
-                    <strong>Storage Tips:</strong><br>
-                    • Store gel in airtight containers to prevent drying and the introduction of air.<br>
-                    • Keep gel at room temperature; extreme temperatures can affect consistency.
-                </p>
-            </div>
-        </div>
-        <!-- Guide 5 -->
-        <div class="accordion-item">
-            <button class="accordion-button">Guide 5: Achieving Smooth Whipped Topping Finish</button>
-            <div class="accordion-content">
-                <p>
-                    <strong>Materials Needed:</strong><br>
-                    • Whipped topping<br>
-                    • Chilled cake layers<br>
-                    • Offset spatula<br>
-                    • Bench scraper or icing smoother<br>
-                    • Turntable (optional but helpful)<br><br>
-
-                    <strong>Step-by-Step Instructions:</strong><br>
-                    1. <strong>Chill Your Cake:</strong> Ensure your cake layers are chilled to prevent crumbs from mixing into the whipped topping.<br>
-                    2. <strong>Apply a Crumb Coat:</strong> Spread a thin layer of whipped topping over the entire cake to seal in crumbs. Refrigerate for 15-30 minutes.<br>
-                    3. <strong>Prepare the Final Coat:</strong> Apply a generous amount of whipped topping to the top and sides of the cake.<br>
-                    4. <strong>Use a Turntable:</strong> Place the cake on a turntable to make smoothing easier and more consistent.<br>
-                    5. <strong>Smooth the Top:</strong> Hold the offset spatula at a slight angle and rotate the turntable, smoothing the top surface.<br>
-                    6. <strong>Smooth the Sides:</strong> Hold the bench scraper or icing smoother vertically against the side of the cake. Rotate the turntable to create an even surface.<br>
-                    7. <strong>Remove Excess Topping:</strong> Wipe off excess whipped topping from your tools as needed to prevent uneven application.<br>
-                    8. <strong>Final Touches:</strong> Use the spatula to smooth any remaining imperfections gently.<br><br>
-
-                    <strong>Tips for a Flawless Finish:</strong><br>
-                    • <strong>Consistent Pressure:</strong> Apply even pressure when smoothing to avoid creating dips or ridges.<br>
-                    • <strong>Warm Your Tools:</strong> Dip your spatula in warm water and dry it before smoothing for a smoother glide.<br>
-                    • <strong>Avoid Overworking:</strong> Excessive smoothing can cause the whipped topping to lose volume and texture.<br><br>
-
-                    <strong>Storage:</strong><br>
-                    • Keep the cake refrigerated to maintain the whipped topping's stability.<br>
-                    • For best results, serve within 1-2 days.
-                </p>
-            </div>
-        </div>
-        <!-- Guide 6 -->
-        <div class="accordion-item">
-            <button class="accordion-button">Guide 6: Creating Whipped Topping Flowers</button>
-            <div class="accordion-content">
-                <p>
-                    <strong>Materials Needed:</strong><br>
-                    • Whipped topping<br>
-                    • Piping bags<br>
-                    • Assorted piping tips (rose tip, petal tip, leaf tip)<br>
-                    • Flower nails (optional)<br>
-                    • Food coloring (if tinting the whipped topping)<br><br>
-
-                    <strong>General Tips:</strong><br>
-                    • <strong>Consistency:</strong> Whipped topping should be firm enough to hold shape but not over-whipped.<br>
-                    • <strong>Coloring:</strong> Use gel food coloring to tint small batches for different flower colors.<br>
-                    • <strong>Practice:</strong> Pipe a few practice flowers on parchment paper before applying them to the cake.<br><br>
-
-                    <strong>Flower Techniques:</strong><br>
-
-                    <em>Rose Flowers:</em><br>
-                    1. Fit a piping bag with a rose tip (e.g., Wilton 104).<br>
-                    2. Hold the piping bag at a 45-degree angle.<br>
-                    3. Pipe a small cone shape as the center of the rose.<br>
-                    4. Pipe petals around the center, overlapping each petal slightly.<br>
-                    5. Continue adding layers until the rose reaches desired size.<br><br>
-
-                    <em>Daisy Flowers:</em><br>
-                    1. Use a small round tip or petal tip.<br>
-                    2. Pipe a dot in the center for the flower's core.<br>
-                    3. Pipe elongated petals radiating from the center, keeping them uniform in size.<br><br>
-
-                    <em>Sunflowers:</em><br>
-                    1. Pipe a brown or black center using a round tip.<br>
-                    2. Use a leaf tip with yellow whipped topping for petals.<br>
-                    3. Pipe petals around the center, pulling outward for pointed ends.<br><br>
-
-                    <em>Tulips:</em><br>
-                    1. Fit a piping bag with a multi-opening tip designed for tulips.<br>
-                    2. Hold the bag straight up and apply steady pressure while pulling upward.<br>
-                    3. Release pressure and lift off to form the tulip shape.<br><br>
-
-                    <em>Lilies:</em><br>
-                    1. Use a petal tip with the narrow end up.<br>
-                    2. Pipe long, curved petals, usually six per flower.<br>
-                    3. Add stamens using a small round tip in a contrasting color.<br><br>
-
-                    <strong>Adding Leaves:</strong><br>
-                    • Use a leaf tip and green whipped topping.<br>
-                    • Pipe leaves around the flowers to fill gaps and add realism.<br><br>
-
-                    <strong>Transferring Flowers to Cake:</strong><br>
-                    • If using a flower nail, transfer the flower onto the cake using a small spatula.<br>
-                    • Place carefully to maintain the shape of the flower.<br><br>
-
-                    <strong>Final Tips:</strong><br>
-                    • Keep whipped topping chilled to maintain firmness.<br>
-                    • Clean tips between colors to prevent color mixing.
-                </p>
-            </div>
-        </div>
-        <!-- Guide 7 -->
-        <div class="accordion-item">
-            <button class="accordion-button">Guide 7: Troubleshooting Common Edible Image Printer Issues</button>
-            <div class="accordion-content">
-                <p>
-                    <strong>Issue 1: Print Head Clogging</strong><br>
-                    • <strong>Symptoms:</strong> Streaks or missing colors in printed images.<br>
-                    • <strong>Solution:</strong> Perform a print head cleaning cycle as per the printer's manual. If necessary, remove the print head and clean it gently with warm water.<br><br>
-
-                    <strong>Issue 2: Poor Image Quality</strong><br>
-                    • <strong>Symptoms:</strong> Blurry or pixelated images.<br>
-                    • <strong>Solution:</strong> Ensure the image resolution is at least 300 DPI. Check that the printer settings are set to high-quality or photo printing mode.<br><br>
-
-                    <strong>Issue 3: Edible Paper Jamming</strong><br>
-                    • <strong>Symptoms:</strong> Paper gets stuck or doesn't feed properly.<br>
-                    • <strong>Solution:</strong> Use only compatible edible paper. Store paper flat in a cool, dry place. Fan the sheets gently before loading to prevent sticking.<br><br>
-
-                    <strong>Issue 4: Colors Not Matching Screen</strong><br>
-                    • <strong>Symptoms:</strong> Printed colors differ from those displayed on the monitor.<br>
-                    • <strong>Solution:</strong> Calibrate your monitor and printer color settings. Use ICC color profiles if available. Print a test page and adjust settings accordingly.<br><br>
-
-                    <strong>Issue 5: Printer Not Recognizing Edible Ink Cartridges</strong><br>
-                    • <strong>Symptoms:</strong> Error messages about cartridges or inability to print.<br>
-                    • <strong>Solution:</strong> Ensure cartridges are properly installed. Clean the cartridge contacts gently with a lint-free cloth. Use only compatible edible ink cartridges.<br><br>
-
-                    <strong>Maintenance Tips:</strong><br>
-                    • <strong>Regular Use:</strong> Print at least once a week to keep ink flowing and prevent clogs.<br>
-                    • <strong>Proper Storage:</strong> If not in use, remove cartridges and store them in an airtight container with a damp paper towel to maintain moisture.<br>
-                    • <strong>Avoid Cross-Contamination:</strong> Do not use the printer for non-edible printing to prevent contamination.<br><br>
-
-                    <strong>Safety Precautions:</strong><br>
-                    • Always use FDA-approved edible inks and papers.<br>
-                    • Keep the printer in a clean environment to prevent dust and debris from affecting prints.<br><br>
-
-                    <strong>Technical Support:</strong><br>
-                    • Consult the printer's user manual for model-specific troubleshooting.<br>
-                    • Contact the manufacturer or supplier for assistance if issues persist.
-                </p>
-            </div>
-        </div>
-        <!-- Guide 8 -->
-        <div class="accordion-item">
-            <button class="accordion-button">Guide 8: How to Redeem Credits in PhotoCake</button>
-            <div class="accordion-content">
-                <ol>
-                    <li>Open the PhotoCake application on your device.</li>
-                    <li>On the home page, navigate to the top right corner and click on <strong>My PhotoCake</strong>.</li>
-                    <li>Select the <strong>Media Credits</strong> tab located at the top left of the screen.</li>
-                    <li>In the center of the page, locate the three boxes designated for entering your media credit code.</li>
-                    <li>Carefully enter your media credit code into the boxes. Double-check for accuracy.</li>
-                    <li>If the <strong>Redeem</strong> button remains inactive (greyed out), the code may have been entered incorrectly. Re-enter the code and ensure all characters are correct.</li>
-                    <li>Once the <strong>Redeem</strong> button becomes clickable (turns blue), click it to add the credits to your account.</li>
-                    <li>A confirmation message should appear, indicating that your credits have been successfully added.</li>
-                </ol>
-                <p>
-                    <strong>Troubleshooting:</strong><br>
-                    • If you continue to experience issues, verify that your internet connection is stable.<br>
-                    • Ensure that you are using the latest version of the PhotoCake software.<br>
-                    • Contact PhotoCake support if problems persist.
-                </p>
-            </div>
-        </div>
-        <!-- Guide 9 -->
-        <div class="accordion-item">
-            <button class="accordion-button">Guide 9: How to Clear the Printer Queue on Windows 11</button>
-            <div class="accordion-content">
-                <ol>
-                    <li>Click on the <strong>Start</strong> button and select <strong>Settings</strong> (gear icon).</li>
-                    <li>In the Settings window, choose <strong>Bluetooth & devices</strong>.</li>
-                    <li>Select <strong>Printers & scanners</strong> from the list of options.</li>
-                    <li>Find and click on your printer from the list of installed printers.</li>
-                    <li>Click on <strong>Open print queue</strong> or <strong>Open queue</strong> to view all pending print jobs.</li>
-                    <li>In the print queue window, select the print job(s) you wish to cancel.</li>
-                    <li>Right-click on the selected job(s) and choose <strong>Cancel</strong>. Alternatively, you can click on the <strong>Document</strong> menu and select <strong>Cancel</strong>.</li>
-                    <li>Confirm the cancellation if prompted. The selected print jobs should be removed from the queue.</li>
-                </ol>
-                <p>
-                    <strong>Alternative Method Using Command Prompt:</strong><br>
-                    1. Click on the <strong>Start</strong> button, type <strong>cmd</strong>, and select <strong>Command Prompt</strong> as an administrator.<br>
-                    2. In the Command Prompt window, type <code>net stop spooler</code> and press Enter.<br>
-                    3. Next, type <code>del %systemroot%\System32\spool\printers\* /Q</code> and press Enter to delete all files in the print queue.<br>
-                    4. Finally, type <code>net start spooler</code> and press Enter to restart the print spooler service.<br>
-                    5. Close the Command Prompt window.
-                </p>
-                <p>
-                    <strong>Note:</strong> Clearing the print queue will cancel all pending print jobs. Ensure that no other users are printing before performing this action.
-                </p>
-            </div>
-        </div>
-        <!-- Guide 10 -->
-        <div class="accordion-item">
-            <button class="accordion-button">Guide 10: How to Mix Gel Colors</button>
-            <div class="accordion-content">
-                <p>
-                    If you need to adjust the color of your gel or repurpose it due to a mistake, you can often modify it by adding other colors. For instance, adding black can help darken colors or create a new shade. However, this does not apply to pastel colors because of the addition of whitener.<br><br>
-
-                    <strong>General Tips:</strong><br>
-                    • Always add colors gradually; it's easier to darken than to lighten a color.<br>
-                    • Keep a record of the number of drops used for consistent results in future batches.<br>
-                    • Use separate mixing tools for each color to avoid cross-contamination.<br><br>
-
-                    <strong>Gel Color Mixing Chart:</strong>
-                    <table border="1" cellpadding="10" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Color</th>
-                                <th>Standard Mixing Instructions</th>
-                                <th>Pastel Mixing Instructions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Black</td>
-                                <td>Add enough black gel color to achieve a deep black shade.</td>
-                                <td>N/A</td>
-                            </tr>
-                            <tr>
-                                <td>Grey</td>
-                                <td>Mix 1 drop of black into the clear gel.</td>
-                                <td>Mix 1-2 drops of black with white gel.</td>
-                            </tr>
-                            <tr>
-                                <td>White</td>
-                                <td>Add white gel color until the gel is opaque.</td>
-                                <td>N/A</td>
-                            </tr>
-                            <tr>
-                                <td>Red</td>
-                                <td>Add red gel color until a deep red is achieved. If it appears pink, continue adding red.</td>
-                                <td>Add more red gel to the white base; pastel reds require more color due to the whitener.</td>
-                            </tr>
-                            <tr>
-                                <td>Orange</td>
-                                <td>Add 5 drops of orange gel color.</td>
-                                <td>Add 5 drops of orange to a white gel base.</td>
-                            </tr>
-                            <tr>
-                                <td>Yellow</td>
-                                <td>Add 5 drops of yellow gel color.</td>
-                                <td>Add 5 drops of yellow to a white gel base.</td>
-                            </tr>
-                            <tr>
-                                <td>Green</td>
-                                <td>
-                                    • Dark Green: 15 drops of leaf green<br>
-                                    • Light Green: 1 drop of leaf green<br>
-                                    • Lime Green: 1 drop of lime green
-                                </td>
-                                <td>Add 3 drops of leaf green to a white gel base.</td>
-                            </tr>
-                            <tr>
-                                <td>Blue</td>
-                                <td>
-                                    • Sky Blue: 2 drops of sky blue<br>
-                                    • Royal Blue: 15 drops of royal blue
-                                </td>
-                                <td>Add 2 drops of sky blue to a white gel base.</td>
-                            </tr>
-                            <tr>
-                                <td>Purple</td>
-                                <td>
-                                    • Light Purple: 2 drops of violet<br>
-                                    • Dark Purple: 6 drops of violet
-                                </td>
-                                <td>Add 2 drops of violet to a white gel base.</td>
-                            </tr>
-                            <tr>
-                                <td>Pink</td>
-                                <td>
-                                    • Light Pink: 2 drops of blushing pink<br>
-                                    • Dark Pink: 2 drops of princess pink
-                                </td>
-                                <td>Add 2 drops of blushing pink to a white gel base.</td>
-                            </tr>
-                            <tr>
-                                <td>Teal</td>
-                                <td>
-                                    • Light Teal: 2 drops of teal green<br>
-                                    • Dark Teal: 5 drops of teal green
-                                </td>
-                                <td>N/A</td>
-                            </tr>
-                            <tr>
-                                <td>Peach/Flesh</td>
-                                <td>
-                                    • Peach: ½ drop of orange<br>
-                                    • Flesh Tone: 1 drop of flesh tone
-                                </td>
-                                <td>N/A</td>
-                            </tr>
-                            <tr>
-                                <td>Brown</td>
-                                <td>
-                                    • Light Brown: 2 drops of brown gel color<br>
-                                    • Dark Brown: 6 drops of brown gel color
-                                </td>
-                                <td>Add 2 drops of brown to a white gel base.</td>
-                            </tr>
-                            <tr>
-                                <td>Clear</td>
-                                <td>Use the gel as is, without adding any color.</td>
-                                <td>N/A</td>
-                            </tr>
-                        </tbody>
+                        </tr>
                     </table>
-                    <br>
-                    <strong>Additional Notes:</strong><br>
-                    • Pastel colors are achieved by adding gel colors to a white gel base, which contains whitener.<br>
-                    • Always test a small amount of gel color before mixing larger batches.<br>
-                    • Record successful color mixes for future reference.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
+                </div>
 
-      <!-- Tutorials -->
-        <section id="tutorials">
-            <h2>Video Tutorials</h2>
-            <div class="accordion">
-                <div class="accordion-item">
-                    <button class="accordion-button">Tutorial 1: Multi-Colored Whip Bag</button>
-                    <div class="accordion-content">
-                        <a href="">Video</a>
+                <!-- Whipped Topping Tips -->
+                <div class="ref-card">
+                    <h3>Whipped Topping Guide</h3>
+                    <div class="tips-grid">
+                        <div class="tip-item">
+                            <h4>Perfect Consistency</h4>
+                            <ul>
+                                <li>Should hold firm peaks</li>
+                                <li>Not too soft (will collapse)</li>
+                                <li>Not too stiff (will be rough)</li>
+                                <li>Temperature: Keep below 40°F</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Common Issues</h4>
+                            <ul>
+                                <li>Melting: Return to cooler for 5-10 min</li>
+                                <li>Bubbles: Gently tap piping bag</li>
+                                <li>Too Stiff: Let warm slightly</li>
+                                <li>Too Soft: Return to cooler</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Color Mixing Guide - Complete -->
+                <div class="ref-card">
+                    <h3>Gel Color Formulas</h3>
+                    <div class="color-grid">
+                        <!-- Pinks & Reds -->
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #ff69b4;"></div>
+                            <div class="color-info">
+                                <h4>Light Pink</h4>
+                                <p>1 drop Red</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #ff1493;"></div>
+                            <div class="color-info">
+                                <h4>Deep Pink</h4>
+                                <p>3 drops Red</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #ff0000;"></div>
+                            <div class="color-info">
+                                <h4>Red</h4>
+                                <p>3 drops Red</p>
+                            </div>
+                        </div>
+                        <!-- Blues -->
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #87ceeb;"></div>
+                            <div class="color-info">
+                                <h4>Sky Blue</h4>
+                                <p>1 drop Blue</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #4169e1;"></div>
+                            <div class="color-info">
+                                <h4>Royal Blue</h4>
+                                <p>3 drops Blue</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #000080;"></div>
+                            <div class="color-info">
+                                <h4>Navy Blue</h4>
+                                <p>4 drops Blue + 1 Black</p>
+                            </div>
+                        </div>
+                        <!-- Purples -->
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #9370db;"></div>
+                            <div class="color-info">
+                                <h4>Purple</h4>
+                                <p>2 Blue + 1 Red</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #4b0082;"></div>
+                            <div class="color-info">
+                                <h4>Deep Purple</h4>
+                                <p>3 Blue + 2 Red</p>
+                            </div>
+                        </div>
+                        <!-- Greens -->
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #90ee90;"></div>
+                            <div class="color-info">
+                                <h4>Light Green</h4>
+                                <p>1 drop Green</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #32cd32;"></div>
+                            <div class="color-info">
+                                <h4>Green</h4>
+                                <p>2 drops Green</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #006400;"></div>
+                            <div class="color-info">
+                                <h4>Dark Green</h4>
+                                <p>3 Green + 1 Black</p>
+                            </div>
+                        </div>
+                        <!-- Browns & Golds -->
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #8b4513;"></div>
+                            <div class="color-info">
+                                <h4>Brown</h4>
+                                <p>2 Brown</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #ffd700;"></div>
+                            <div class="color-info">
+                                <h4>Gold</h4>
+                                <p>3 Yellow + 1 Brown</p>
+                            </div>
+                        </div>
+                        <!-- Orange & Yellow -->
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #ff6b35;"></div>
+                            <div class="color-info">
+                                <h4>Orange</h4>
+                                <p>3 Yellow + 1 Red</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #ffff00;"></div>
+                            <div class="color-info">
+                                <h4>Yellow</h4>
+                                <p>2 Yellow</p>
+                            </div>
+                        </div>
+                        <!-- Black -->
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #000000;"></div>
+                            <div class="color-info">
+                                <h4>Black</h4>
+                                <p>2 Black</p>
+                            </div>
+                        </div>
+                        <!-- New Colors -->
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #ff7f50;"></div>
+                            <div class="color-info">
+                                <h4>Coral</h4>
+                                <p>2 Yellow + 2 Red</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #e6e6fa;"></div>
+                            <div class="color-info">
+                                <h4>Lavender</h4>
+                                <p>1 Blue + 2 Red</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #20b2aa;"></div>
+                            <div class="color-info">
+                                <h4>Teal</h4>
+                                <p>2 Blue + 1 Green</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-sample" style="background-color: #deb887;"></div>
+                            <div class="color-info">
+                                <h4>Tan</h4>
+                                <p>1 Brown + 2 Yellow</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Designs - Expanded -->
+                <div class="ref-card">
+                    <h3>Quick Design Reference</h3>
+                    <div class="design-grid">
+                        <div class="design-item">
+                            <img src="designs/rosette-border.jpg" alt="Rosette Border">
+                            <div class="design-info">
+                                <h4>Rosette Border</h4>
+                                <p>Tip: #18 | Motion: Spiral</p>
+                                <p class="design-note">Start from center, spiral outward</p>
+                            </div>
+                        </div>
+                        <div class="design-item">
+                            <img src="designs/shell-border.jpg" alt="Shell Border">
+                            <div class="design-info">
+                                <h4>Shell Border</h4>
+                                <p>Tip: #21 | Motion: Pull & Stop</p>
+                                <p class="design-note">Overlap each shell slightly</p>
+                            </div>
+                        </div>
+                        <div class="design-item">
+                            <img src="designs/writing.jpg" alt="Writing">
+                            <div class="design-info">
+                                <h4>Writing</h4>
+                                <p>Tip: #3 | Pressure: Light</p>
+                                <p class="design-note">Practice on parchment first</p>
+                            </div>
+                        </div>
+                        <div class="design-item">
+                            <img src="designs/star-border.jpg" alt="Star Border">
+                            <div class="design-info">
+                                <h4>Star Border</h4>
+                                <p>Tip: #32 | Motion: Press & Pull</p>
+                                <p class="design-note">Even pressure for consistent stars</p>
+                            </div>
+                        </div>
+                        <div class="design-item">
+                            <img src="designs/rope-border.jpg" alt="Rope Border">
+                            <div class="design-info">
+                                <h4>Rope Border</h4>
+                                <p>Tip: #47 | Motion: Continuous Wave</p>
+                                <p class="design-note">Maintain steady speed</p>
+                            </div>
+                        </div>
+                        <div class="design-item">
+                            <img src="designs/leaf-border.jpg" alt="Leaf Border">
+                            <div class="design-info">
+                                <h4>Leaf Border</h4>
+                                <p>Tip: #352 | Motion: Press & Pull</p>
+                                <p class="design-note">Angle tip for natural look</p>
+                            </div>
+                        </div>
+                        <div class="design-item">
+                            <img src="designs/projector-transfer.jpg" alt="Projector Transfer">
+                            <div class="design-info">
+                                <h4>Projector Transfer</h4>
+                                <p>Tool: Basic Projector | Surface: Chilled</p>
+                                <p class="design-note">Trace with tip #2, light pressure</p>
+                            </div>
+                        </div>
+                        <div class="design-item">
+                            <img src="designs/stencil-spray.jpg" alt="Stencil Spray">
+                            <div class="design-info">
+                                <h4>Stencil Spray</h4>
+                                <p>Tool: Airbrush | Distance: 6"</p>
+                                <p class="design-note">Hold stencil firm, light coats</p>
+                            </div>
+                        </div>
+                        <div class="design-item">
+                            <img src="designs/brush-embroidery.jpg" alt="Brush Embroidery">
+                            <div class="design-info">
+                                <h4>Brush Embroidery</h4>
+                                <p>Tools: Tip #3 + Brush | Gel: Stiff</p>
+                                <p class="design-note">Pipe then feather with brush</p>
+                            </div>
+                        </div>
+                        <div class="design-item">
+                            <img src="designs/basket-weave.jpg" alt="Basket Weave">
+                            <div class="design-info">
+                                <h4>Basket Weave</h4>
+                                <p>Tool: Tip #47 | Motion: Straight Lines</p>
+                                <p class="design-note">Alternate horizontal/vertical stripes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Airbrush Guide - Expanded -->
+                <div class="ref-card">
+                    <h3>Airbrush Guide</h3>
+                    <div class="airbrush-grid">
+                        <div class="technique-item">
+                            <h4>Basic Techniques</h4>
+                            <ul>
+                                <li>Distance: 6-8 inches for even coverage</li>
+                                <li>Pressure: Medium (test on paper first)</li>
+                                <li>Motion: Circular for smooth blend</li>
+                                <li>Clean between colors thoroughly</li>
+                            </ul>
+                        </div>
+                        <div class="technique-item">
+                            <h4>Color Effects</h4>
+                            <ul>
+                                <li>Pearl + Pink = Shimmer Rose</li>
+                                <li>Blue + Pearl = Ice Effect</li>
+                                <li>Gold + Pearl = Metallic Shine</li>
+                                <li>Multiple Colors = Rainbow</li>
+                                <li>Light spray of Pearl = Sparkle Effect</li>
+                            </ul>
+                        </div>
+                        <div class="technique-item">
+                            <h4>Common Issues</h4>
+                            <ul>
+                                <li>Splattering: Increase distance</li>
+                                <li>Uneven color: Overlap strokes</li>
+                                <li>Too dark: Reduce pressure</li>
+                                <li>Drips: Move faster, less color</li>
+                            </ul>
+                        </div>
+                        <div class="technique-item">
+                            <h4>Special Effects</h4>
+                            <ul>
+                                <li>Stencils: Hold firmly, light spray</li>
+                                <li>Fading: Gradually increase distance</li>
+                                <li>Patterns: Use template guides</li>
+                                <li>Borders: Use cake strip as guide</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Airbrush Color Guide - Expanded for Beginners -->
+                <div class="ref-card">
+                    <h3>Airbrush Color Guide</h3>
+                    <div class="airbrush-color-grid">
+                        <!-- Basic Colors -->
+                        <div class="airbrush-color-item">
+                            <div class="color-sample" style="background: linear-gradient(45deg, #ff69b4, #ffc0cb);"></div>
+                            <div class="color-info">
+                                <h4>Pink Shimmer</h4>
+                                <p>Light Pink + Pearl</p>
+                                <p class="technique-note">2-3 light coats, 6" distance</p>
+                                <p class="beginner-tip">Start with edges, work inward</p>
+                            </div>
+                        </div>
+                        <div class="airbrush-color-item">
+                            <div class="color-sample" style="background: linear-gradient(45deg, #4169e1, #87ceeb);"></div>
+                            <div class="color-info">
+                                <h4>Ice Blue</h4>
+                                <p>Blue + Pearl</p>
+                                <p class="technique-note">Light, circular motions</p>
+                                <p class="beginner-tip">Practice on paper first</p>
+                            </div>
+                        </div>
+                        <div class="airbrush-color-item">
+                            <div class="color-sample" style="background: linear-gradient(45deg, #ffd700, #fff8dc);"></div>
+                            <div class="color-info">
+                                <h4>Gold Metallic</h4>
+                                <p>Gold + Pearl</p>
+                                <p class="technique-note">3-4 thin layers</p>
+                                <p class="beginner-tip">Let each layer dry 30 seconds</p>
+                            </div>
+                        </div>
+                        <div class="airbrush-color-item">
+                            <div class="color-sample" style="background: linear-gradient(45deg, #c0c0c0, #ffffff);"></div>
+                            <div class="color-info">
+                                <h4>Pearl Shimmer</h4>
+                                <p>Pearl Only</p>
+                                <p class="technique-note">Very light application</p>
+                                <p class="beginner-tip">Great first-time practice color</p>
+                            </div>
+                        </div>
+                        <!-- Additional Colors -->
+                        <div class="airbrush-color-item">
+                            <div class="color-sample" style="background: linear-gradient(45deg, #ff0000, #ff69b4);"></div>
+                            <div class="color-info">
+                                <h4>Valentine Pink</h4>
+                                <p>Red + Pearl</p>
+                                <p class="technique-note">Start very light</p>
+                                <p class="beginner-tip">Red is strong - use sparingly</p>
+                            </div>
+                        </div>
+                        <div class="airbrush-color-item">
+                            <div class="color-sample" style="background: linear-gradient(45deg, #87ceeb, #e0ffff);"></div>
+                            <div class="color-info">
+                                <h4>Baby Blue</h4>
+                                <p>Light Blue + Pearl</p>
+                                <p class="technique-note">Wide, sweeping motions</p>
+                                <p class="beginner-tip">Perfect for baby showers</p>
+                            </div>
+                        </div>
+                        <div class="airbrush-color-item">
+                            <div class="color-sample" style="background: linear-gradient(45deg, #98fb98, #f0fff0);"></div>
+                            <div class="color-info">
+                                <h4>Spring Green</h4>
+                                <p>Green + Pearl</p>
+                                <p class="technique-note">Light touch, build slowly</p>
+                                <p class="beginner-tip">Great for nature themes</p>
+                            </div>
+                        </div>
+                        <div class="airbrush-color-item">
+                            <div class="color-sample" style="background: linear-gradient(45deg, #dda0dd, #e6e6fa);"></div>
+                            <div class="color-info">
+                                <h4>Soft Purple</h4>
+                                <p>Purple + Pearl</p>
+                                <p class="technique-note">Medium pressure</p>
+                                <p class="beginner-tip">Start from center</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Beginner Tips Section -->
+                    <div class="airbrush-tips">
+                        <h4>Getting Started with Airbrush</h4>
+                        <div class="tips-grid">
+                            <div class="tip-box">
+                                <h5>Setup</h5>
+                                <ul>
+                                    <li>Clean workspace required</li>
+                                    <li>Cover surrounding areas</li>
+                                    <li>Keep paper towels handy</li>
+                                    <li>Wear gloves</li>
+                                </ul>
+                            </div>
+                            <div class="tip-box">
+                                <h5>Basic Technique</h5>
+                                <ul>
+                                    <li>Hold 6-8 inches away</li>
+                                    <li>Use consistent pressure</li>
+                                    <li>Keep moving - don't stop</li>
+                                    <li>Practice on paper first</li>
+                                </ul>
+                            </div>
+                            <div class="tip-box">
+                                <h5>Common Mistakes</h5>
+                                <ul>
+                                    <li>Too close = splatters</li>
+                                    <li>Too much color = runs</li>
+                                    <li>Stopping = spots</li>
+                                    <li>Rushing = uneven coverage</li>
+                                </ul>
+                            </div>
+                            <div class="tip-box">
+                                <h5>Cleaning Tips</h5>
+                                <ul>
+                                    <li>Clean between colors</li>
+                                    <li>Flush with warm water</li>
+                                    <li>Test spray after cleaning</li>
+                                    <li>Keep nozzle clean</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add this new card after the Airbrush Color Guide -->
+                <div class="ref-card">
+                    <h3>Edible Image Printer Guide</h3>
+                    <div class="printer-grid">
+                        <!-- Daily Maintenance -->
+                        <div class="printer-section">
+                            <h4>Daily Maintenance</h4>
+                            <ul>
+                                <li>Run nozzle check before first print</li>
+                                <li>Keep printer covered when not in use</li>
+                                <li>Check humidity levels (40-60% ideal)</li>
+                                <li>Clean paper sensor with dry cloth</li>
+                            </ul>
+                        </div>
+
+                        <!-- Common Issues -->
+                        <div class="printer-section">
+                            <h4>Troubleshooting</h4>
+                            <ul>
+                                <li>Streaky prints:
+                                    <ul>
+                                        <li>Run head cleaning</li>
+                                        <li>Check for expired cartridges</li>
+                                        <li>Verify humidity levels</li>
+                                    </ul>
+                                </li>
+                                <li>Paper jams:
+                                    <ul>
+                                        <li>Remove paper carefully</li>
+                                        <li>Clean rollers with damp cloth</li>
+                                        <li>Let rollers dry completely</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Best Practices -->
+                        <div class="printer-section">
+                            <h4>Tips & Tricks</h4>
+                            <ul>
+                                <li>Store sheets in sealed bag</li>
+                                <li>Handle sheets by edges only</li>
+                                <li>Print within 15 mins of opening</li>
+                                <li>Use sheets at room temperature</li>
+                                <li>Save ink: draft mode for tests</li>
+                            </ul>
+                        </div>
+
+                        <!-- Cleaning Guide -->
+                        <div class="printer-section">
+                            <h4>Cleaning Process</h4>
+                            <ol>
+                                <li>Power off printer</li>
+                                <li>Mix 1:1 water/alcohol solution</li>
+                                <li>Dampen lint-free cloth slightly</li>
+                                <li>Clean rollers in one direction</li>
+                                <li>Wait 30 mins before use</li>
+                            </ol>
+                            <p class="warning-note">Never use cleaning solutions inside print head area!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional CSS -->
+        <style>
+            .specs-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .specs-table th, .specs-table td {
+                padding: 8px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+
+            .tips-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .tip-item {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 6px;
+            }
+
+            .color-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+
+            .color-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 10px;
+                background: #f8f9fa;
+                border-radius: 6px;
+                min-height: 60px;
+            }
+
+            .color-sample {
+                min-width: 40px;
+                width: 40px;
+                min-height: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 2px solid #ddd;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                display: block;
+                flex-shrink: 0;
+            }
+
+            .color-info {
+                flex-grow: 1;
+            }
+
+            .color-info h4 {
+                margin: 0 0 5px 0;
+                font-size: 1rem;
+            }
+
+            .color-info p {
+                margin: 0;
+                font-size: 0.9rem;
+            }
+
+            .design-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+
+            .design-item img {
+                width: 100%;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 6px;
+            }
+
+            .airbrush-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .technique-item {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 6px;
+            }
+
+            .view-all-btn, .catalog-btn {
+                background: #0066cc;
+                color: white;
+                padding: 8px 16px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-block;
+                margin-top: 10px;
+            }
+
+            .design-tabs {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .tab-btn {
+                padding: 8px 16px;
+                border: none;
+                background: #f0f0f0;
+                cursor: pointer;
+                border-radius: 4px;
+            }
+
+            .tab-btn.active {
+                background: #0066cc;
+                color: white;
+            }
+
+            .design-content {
+                display: none;
+            }
+
+            .design-content.active {
+                display: block;
+            }
+
+            .catalog-links {
+                display: flex;
+                gap: 15px;
+                margin-top: 20px;
+                justify-content: center;
+            }
+
+            /* Dark mode considerations */
+            @media (prefers-color-scheme: dark) {
+                .ref-card {
+                    background: #2d2d2d;
+                    color: #fff;
+                }
+
+                .tip-item, .color-item, .technique-item {
+                    background: #3d3d3d;
+                }
+
+                .tab-btn {
+                    background: #3d3d3d;
+                    color: #fff;
+                }
                 
-                <div class="accordion-item">
-                    <button class="accordion-button">Tutorial 2: How to make a Gel Bag</button>
-                    <div class="accordion-content">
-                        <a href="">Video</a>
-                    </div>
-                </div>
-        
-                <div class="accordion-item">
-                    <button class="accordion-button">Tutorial 3: How to Box a Cake in Ice</button>
-                    <div class="accordion-content">
-                        <a href="">Video</a>
-                    </div>
-                </div>
-        
-                <div class="accordion-item">
-                    <button class="accordion-button">Tutorial 4: How to make a Splatter Cake</button>
-                    <div class="accordion-content">
-                        <a href="">Video</a>
-                    </div>
-                </div>
+                .tab-btn.active {
+                    background: #0066cc;
+                }
 
+                .color-item {
+                    background: #3d3d3d;
+                }
+                
+                .color-sample {
+                    border-color: #444;
+                }
+            }
 
-                <div class="accordion-item">
-                    <button class="accordion-button">Tutorial 5: How to pipe a rose and more</button>
-                    <div class="accordion-content">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/7fVB5Dc81Kc?si=-axNLiYOavF_mKmX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
+            .design-note {
+                font-size: 0.9em;
+                color: #666;
+                font-style: italic;
+            }
 
-                <div class="accordion-item">
-                    <button class="accordion-button">Tutorial 6: How to pipe flowers</button>
-                    <div class="accordion-content">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/0EpIeF0Jk9Q?si=72lsCHkvm7Q_Oelm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-button">Tutorial 7: Whip flowers with leaves</button>
-                    <div class="accordion-content">
-                     
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xm14NgrU0Zk?si=rj95fC6riVyi9Mqh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
+            .technique-item ul {
+                list-style-type: none;
+                padding-left: 0;
+            }
 
-                <div class="accordion-item">
-                    <button class="accordion-button">Tutorial 8: Writing tutorial</button>
-                    <div class="accordion-content">
-                     
-<iframe width="560" height="315" src="https://www.youtube.com/embed/NUilzSXZuN4?si=l-m6td_DlhViBwim" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
+            .technique-item li {
+                margin-bottom: 8px;
+                padding-left: 20px;
+                position: relative;
+            }
 
+            .technique-item li:before {
+                content: "•";
+                position: absolute;
+                left: 0;
+                color: #0066cc;
+            }
 
+            /* Dark mode adjustments */
+            @media (prefers-color-scheme: dark) {
+                .design-note {
+                    color: #aaa;
+                }
+                
+                .technique-item li:before {
+                    color: #4d94ff;
+                }
+            }
 
-                <!-- Add more accordion items as needed -->
-            </div>
-        </section>
-        
+            .airbrush-color-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                margin-bottom: 20px;
+            }
 
-        <section id="orders">
-            <h2>Current Cake Orders</h2>
-            <div class="iframe-container">
-<iframe width="700" height="486" frameborder="0" scrolling="no" src=""></iframe>            </div>
-        </section>
+            .airbrush-color-item {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                padding: 15px;
+                background: #f8f9fa;
+                border-radius: 8px;
+                min-height: 100px;
+            }
 
+            .beginner-tip {
+                font-size: 0.8rem;
+                color: #28a745;
+                font-style: italic;
+                margin-top: 4px;
+            }
 
+            .airbrush-tips {
+                margin-top: 30px;
+                padding: 20px;
+                background: #f8f9fa;
+                border-radius: 8px;
+            }
 
+            .tips-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+                margin-top: 15px;
+            }
+
+            .tip-box {
+                padding: 15px;
+                background: white;
+                border-radius: 6px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            }
+
+            .tip-box h5 {
+                margin-top: 0;
+                color: #0066cc;
+            }
+
+            .tip-box ul {
+                list-style-type: none;
+                padding-left: 0;
+                margin: 0;
+            }
+
+            .tip-box li {
+                margin-bottom: 8px;
+                padding-left: 20px;
+                position: relative;
+            }
+
+            .tip-box li:before {
+                content: "→";
+                position: absolute;
+                left: 0;
+                color: #0066cc;
+            }
+
+            /* Dark mode adjustments */
+            @media (prefers-color-scheme: dark) {
+                .airbrush-color-item, .airbrush-tips {
+                    background: #3d3d3d;
+                }
+                
+                .tip-box {
+                    background: #2d2d2d;
+                }
+
+                .beginner-tip {
+                    color: #5cb85c;
+                }
+            }
+
+            .gallery-popup {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                z-index: 1000;
+            }
+
+            .gallery-content {
+                position: relative;
+                width: 90%;
+                max-width: 800px;
+                height: 80vh;
+                margin: 50px auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #gallery-image {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+            }
+
+            .close-gallery {
+                position: absolute;
+                top: 15px;
+                right: 35px;
+                color: #f1f1f1;
+                font-size: 40px;
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 1001;
+            }
+
+            .gallery-nav {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                padding: 16px;
+                font-size: 18px;
+                border: none;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+            .gallery-nav:hover {
+                background: rgba(0, 0, 0, 0.8);
+            }
+
+            .prev {
+                left: 0;
+                border-radius: 0 3px 3px 0;
+            }
+
+            .next {
+                right: 0;
+                border-radius: 3px 0 0 3px;
+            }
+
+            .printer-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .printer-section {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 6px;
+            }
+
+            .printer-section h4 {
+                color: #0066cc;
+                margin-top: 0;
+            }
+
+            .printer-section ul, .printer-section ol {
+                padding-left: 20px;
+                margin-bottom: 10px;
+            }
+
+            .printer-section ul ul {
+                margin-top: 5px;
+            }
+
+            .warning-note {
+                color: #dc3545;
+                font-weight: bold;
+                font-size: 0.9em;
+                margin-top: 10px;
+            }
+
+            /* Dark mode adjustments */
+            @media (prefers-color-scheme: dark) {
+                .printer-section {
+                    background: #3d3d3d;
+                }
+                
+                .printer-section h4 {
+                    color: #4d94ff;
+                }
+                
+                .warning-note {
+                    color: #ff6b6b;
+                }
+            }
+
+            .topbar-buttons {
+                display: flex;
+                gap: 15px;
+                margin: 10px 0;
+            }
+
+            .cake-gallery-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 8px;
+                background: linear-gradient(145deg, #ff6b6b, #e74c3c);
+                color: white;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .cake-gallery-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                background: linear-gradient(145deg, #ff8787, #ff6b6b);
+            }
+
+            .cake-gallery-btn:active {
+                transform: translateY(0);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .cake-gallery-btn i {
+                font-size: 1.2rem;
+            }
+
+            /* Dark mode adjustments */
+            @media (prefers-color-scheme: dark) {
+                .cake-gallery-btn {
+                    background: linear-gradient(145deg, #e74c3c, #c0392b);
+                }
+
+                .cake-gallery-btn:hover {
+                    background: linear-gradient(145deg, #ff6b6b, #e74c3c);
+                }
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                .topbar-buttons {
+                    flex-direction: column;
+                    width: 100%;
+                }
+
+                .cake-gallery-btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
+        </style>
     </main>
 
     <!-- Footer -->
     <footer>
         <p>&copy; 2024 Courtenay DQ. All rights reserved.</p>
-        <p>Contact us: <a href="mailto:cvdq@shaw.ca">cvdq@shaw.ca</a> | Phone: (250) 334-4498</p>
+        <p>Contact us: <a href="mailto:info@dqcakedecorators.com">cvdq@shaw.ca</a> | Phone: (250) 334-4498</p>
     </footer>
 
     <!-- Optional JavaScript -->
