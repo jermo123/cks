@@ -34,47 +34,45 @@ function createCatalogView(type) {
     const gridContainer = document.createElement('div');
     gridContainer.className = 'catalog-grid';
     
-    // Fetch and create catalog items
-    fetch(`gallery/images/${type}/`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(html => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const images = Array.from(doc.querySelectorAll('a'))
+    // Get all images in the directory
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `gallery/images/${type}/`, true);
+    
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const container = document.createElement('div');
+            container.innerHTML = xhr.responseText;
+            
+            // Find all image links
+            const images = Array.from(container.getElementsByTagName('a'))
                 .filter(a => a.href.match(/\.(jpg|jpeg|png|gif)$/i))
                 .map(a => ({
                     src: a.href.split('/').pop(),
                     title: a.href.split('/').pop().replace(/\.[^/.]+$/, '').replace(/_/g, ' ')
                 }));
-            
+
             if (images.length === 0) {
                 gridContainer.innerHTML = '<p>No images found in this gallery.</p>';
-                return;
+            } else {
+                images.forEach((image, index) => {
+                    const catalogItem = document.createElement('div');
+                    catalogItem.className = 'catalog-item';
+                    
+                    catalogItem.innerHTML = `
+                        <div class="catalog-image-container">
+                            <img src="gallery/images/${type}/${image.src}" 
+                                 alt="${image.title}"
+                                 onclick="showGallery('${type}', ${index})"
+                                 onerror="handleImageError(this)">
+                        </div>
+                        <div class="catalog-info">
+                            <h3>${image.title}</h3>
+                        </div>
+                    `;
+                    
+                    gridContainer.appendChild(catalogItem);
+                });
             }
-            
-            images.forEach((image, index) => {
-                const catalogItem = document.createElement('div');
-                catalogItem.className = 'catalog-item';
-                
-                catalogItem.innerHTML = `
-                    <div class="catalog-image-container">
-                        <img src="gallery/images/${type}/${image.src}" 
-                             alt="${image.title}"
-                             onclick="showGallery('${type}', ${index})"
-                             onerror="handleImageError(this)">
-                    </div>
-                    <div class="catalog-info">
-                        <h3>${image.title}</h3>
-                    </div>
-                `;
-                
-                gridContainer.appendChild(catalogItem);
-            });
             
             catalogContainer.appendChild(gridContainer);
             
@@ -83,21 +81,30 @@ function createCatalogView(type) {
                 src: `gallery/images/${type}/${img.src}`,
                 title: img.title
             }));
-        })
-        .catch(error => {
-            console.error('Error loading images:', error);
+        } else {
+            console.error('Error loading images:', xhr.statusText);
             gridContainer.innerHTML = `
                 <div class="error-message">
                     <p>Error loading images. Please try again later.</p>
-                    <p class="error-details">${error.message}</p>
+                    <p class="error-details">Status: ${xhr.status}</p>
                 </div>
             `;
             catalogContainer.appendChild(gridContainer);
-        });
+        }
+    };
     
-    // Show the appropriate gallery
-    document.querySelectorAll('.gallery').forEach(g => g.classList.remove('active'));
-    catalogContainer.classList.add('active');
+    xhr.onerror = function() {
+        console.error('Error loading images:', xhr.statusText);
+        gridContainer.innerHTML = `
+            <div class="error-message">
+                <p>Error loading images. Please try again later.</p>
+                <p class="error-details">Network Error</p>
+            </div>
+        `;
+        catalogContainer.appendChild(gridContainer);
+    };
+    
+    xhr.send();
 }
 
 function showGallery(type, startIndex = 0) {
