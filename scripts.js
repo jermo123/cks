@@ -132,7 +132,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add click handlers for the gallery type buttons
     document.querySelectorAll('.cake-gallery-btn').forEach(btn => {
         btn.onclick = function() {
-            const type = this.getAttribute('data-gallery-type');
+            // Try to get type from data attribute first, then fallback to onclick attribute
+            const type = this.getAttribute('data-gallery-type') || 
+                        this.getAttribute('onclick')?.match(/showGallery\('(\w+)'\)/)?.[1];
+            
             if (!type) {
                 console.error('Gallery type not specified on button');
                 return;
